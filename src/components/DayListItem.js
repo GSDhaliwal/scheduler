@@ -10,7 +10,7 @@ export default function DayListItem(props) {
     "day-list__item--full": props.spots === 0
   });
   
-  const formatSports = function(props) {
+  const formatSpots = function(props) {
     let availableSpots = 0;
     if (props.spots >= 2) {
       availableSpots = props.spots;
@@ -29,7 +29,7 @@ export default function DayListItem(props) {
       onClick={() => props.setDay(props.name)}
     >
       <h2 className="text--regular">{ props.name }</h2> 
-      <h3 className="text--light">{ formatSports(props) }</h3>
+      <h3 className="text--light">{ formatSpots(props) }</h3>
     </li>
   );
 }
