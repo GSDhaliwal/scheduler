@@ -9,7 +9,10 @@ import DayList from "../src/components/DayList"
 import InterviewerListItem from "../src/components/InterviewerListItem"
 import InterviewerList from "../src/components/InterviewerList"
 import Button from "components/Button";
-
+import Appointment from "../src/components/Appointment/index"
+import Header from "../src/components/Appointment/Header"
+import Empty from "../src/components/Appointment/Empty"
+import Show from "../src/components/Appointment/Show"
 //Buttons stories
 
 storiesOf("Button", module)
@@ -108,11 +111,11 @@ storiesOf("DayListItem", module) //Initiates Storybook and registers our DayList
           id={interviewer.id}
           name={interviewer.name}
           avatar={interviewer.avatar}
-          setInterviewer={action("setInterviewer")}
+          setInterviewer={action("setInterviewer")(interviewer.id)}
         />
       ));
 
-////InterviewerList stories
+//InterviewerList stories
 
       const interviewers = [
   { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
@@ -139,3 +142,27 @@ storiesOf("InterviewerList", module)
       setInterviewer={action("setInterviewer")}
     />
   ));
+
+
+//Appointment stories
+
+storiesOf("Appointment", module)
+  .addParameters({
+    backgrounds: [{ name: "white", value: "#fff",   default: true }]
+  })
+  .add("Appointment", () => <Appointment />)
+  .add("Appointment with Time", () => <Appointment
+    time="12pm" 
+  />)
+  .add("Header", () => <Header 
+    time="12pm"
+  />)
+  .add("Empty", () => <Empty 
+    onAdd={action("onAdd")}
+  />)
+  .add("Show", () => <Show 
+    student="Lydia Miller-Jones"
+    interviewerName={interviewer.name}
+    onEdit={action("onEdit")}
+    onDelete={action("onDelete")}
+  />)

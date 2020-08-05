@@ -12,6 +12,7 @@ export default function InterviewerList(props){
   if (Array.isArray(props.interviewers)) {
     interviewer = props.interviewers.map(interviewer => (
       <InterviewerListItem
+        id={interviewer.id}
         key={interviewer.id}
         name={interviewer.name}
         avatar={interviewer.avatar}
