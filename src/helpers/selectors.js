@@ -1,6 +1,5 @@
-import React from "react";
 
-export function getAppointmentsForDay(state, day) {
+export default function getAppointmentsForDay(state, day) {
 
   let days = state.days;
   let appointments = state.appointments;
