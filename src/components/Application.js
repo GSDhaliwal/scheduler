@@ -60,6 +60,13 @@ export default function Application() {
   }
 
   const cancelInterview = function(id) {
+    return(
+      axios
+      .delete(`/api/appointments/${id}`)
+    )
+  }
+
+  const updateInterview = function(id) {
     const appointment = {
       ...state.appointments[id],
       interview: null
@@ -72,10 +79,6 @@ export default function Application() {
       ...state,
       appointments
     });
-    return(
-      axios
-      .delete(`/api/appointments/${id}`)
-    )
   }
 
 
@@ -91,6 +94,7 @@ export default function Application() {
         interviewers={interviewers}
         bookInterview={bookInterview}
         cancelInterview={cancelInterview}
+        updateInterview={updateInterview}
       />
     );
   });
