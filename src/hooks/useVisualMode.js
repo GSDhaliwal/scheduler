@@ -26,8 +26,7 @@ export default function useVisualMode(initial) {
       history.pop();
       setHistory(history)
       }
-    console.log('1111111111111111111111', history)
-    console.log(backOneStep)
+   
 
     }
 
