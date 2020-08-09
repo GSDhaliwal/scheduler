@@ -35,16 +35,33 @@ export default function Appointment(props) {
     };
     transition(SAVING);
     props.bookInterview(props.id, interview)
-      .then(res => transition(SHOW))
+      .then(res => {
+        props.updateInterviewAfterBooking(props.id, interview)
+        transition(SHOW)
+      })
       .catch(error => transition(ERROR_SAVE, true))
-    }
+  }
+
+  const edit = function(name, interviewer) {
+    const interview = {
+      student: name,
+      interviewer
+    };
+    transition(SAVING);
+    props.bookInterview(props.id, interview)
+      .then(res => {
+        props.updateInterviewAfterEdit(props.id, interview)
+        transition(SHOW)
+      })
+      .catch(error => transition(ERROR_SAVE, true))
+  }
 
   const cancel = function() {
     transition(DELETING, true);
     props.cancelInterview(props.id)
       .then(res => {
+        props.updateInterviewAfterCancel(props.id)
         transition(EMPTY)
-        props.updateInterview(props.id)
       })
       .catch(error => transition(ERROR_DELETE, true))
   }
@@ -82,7 +99,7 @@ export default function Appointment(props) {
             name={props.interview.student}
             interviewer={props.interview.interviewer.id}
             interviewers={props.interviewers}
-            onSave={save}
+            onSave={edit}
             onCancel={(() => back())}
           />}
         {mode === ERROR_SAVE && 

@@ -24,9 +24,43 @@ export default function useApplicationData() {
     })
   }, [])
   
-
+  
   const bookInterview = function(id, interview) {
-    console.log(id, interview)
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    }
+    return(
+      axios
+      .put(`/api/appointments/${id}`, appointment)
+    )
+  }
+
+  const updateInterviewAfterBooking = function(id, interview) {
+    
+    let dayId;
+
+    if (id <= 5) {
+      dayId = 0; 
+    } else if (id > 5 && id <= 10) {
+      dayId = 1; 
+    } else if (id > 10 && id <= 15) {
+      dayId = 2; 
+    } else if (id > 15 && id <= 20) {
+      dayId = 3; 
+    } else if (id > 20 && id <= 25) {
+      dayId = 4; 
+    }
+
+    
+    const updateSpots = {
+      ...state.days[dayId], spots: state.days[dayId].spots - 1
+    }
+    const days = [...state.days]
+    
+    days[dayId] = updateSpots;
+      
+    
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -35,24 +69,65 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
+    
+   
+      setState({
+        ...state,
+        appointments, days
+      });
+    
+  }
+
+
+  const updateInterviewAfterEdit = function(id, interview) {
+        
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    }
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+  
     setState({
       ...state,
       appointments
     });
-    return(
-      axios
-      .put(`/api/appointments/${id}`, appointment)
-    )
+    
   }
 
   const cancelInterview = function(id) {
     return(
       axios
       .delete(`/api/appointments/${id}`)
+
     )
   }
 
-  const updateInterview = function(id) {
+  const updateInterviewAfterCancel = function(id) {
+    let dayId;
+
+    if (id <= 5) {
+      dayId = 0; 
+    } else if (id > 5 && id <= 10) {
+      dayId = 1; 
+    } else if (id > 10 && id <= 15) {
+      dayId = 2; 
+    } else if (id > 15 && id <= 20) {
+      dayId = 3; 
+    } else if (id > 20 && id <= 25) {
+      dayId = 4; 
+    }
+
+    
+    const updateSpots = {
+      ...state.days[dayId], spots: state.days[dayId].spots + 1
+    }
+    const days = [...state.days]
+    
+    days[dayId] = updateSpots;
+       
     const appointment = {
       ...state.appointments[id],
       interview: null
@@ -61,12 +136,13 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
+
     setState({
       ...state,
-      appointments
+      appointments, days
     });
   }
 
-  return { state, setDay, bookInterview, cancelInterview, updateInterview };
+  return { state, setDay, bookInterview, cancelInterview, updateInterviewAfterBooking, updateInterviewAfterCancel, updateInterviewAfterEdit };
 
 }
