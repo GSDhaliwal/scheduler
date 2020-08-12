@@ -1,5 +1,21 @@
 # Interview Scheduler
 
+A React application that simulates how users can book and cancel interviews.
+
+## Final Product
+
+
+## Dependencies
+
+- axios
+- classnames
+- normalize.css
+- react
+- react-dom
+- react-scripts
+- @testing-library/react-hooks
+- react-test-renderer
+
 ## Setup
 
 Install dependencies with `npm install`.
