@@ -141,7 +141,7 @@ export default function useApplicationData() {
       ...state,
       appointments, days
     });
-  }
+  };
 
   return { state, setDay, bookInterview, cancelInterview, updateInterviewAfterBooking, updateInterviewAfterCancel, updateInterviewAfterEdit };
 
