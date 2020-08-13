@@ -4,8 +4,11 @@ A React application that simulates how users can book and cancel interviews.
 
 ## Final Product
 
+### Booked Appointments
 !["Booked Appointments"](https://github.com/GSDhaliwal/scheduler/blob/master/docs/bookedAppointments.png?raw=true)
 
+
+### Adding or Editing an Appointment
 !["Adding or Editing an Appointment"](https://github.com/GSDhaliwal/scheduler/blob/master/docs/bookedAppointments.png?raw=true)
 
 
